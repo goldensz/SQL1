@@ -1,0 +1,35 @@
+#1
+select count(track.mediatypeid) as 'Number of Files', MediaType.name as 'File Type'
+from Track
+join MediaType
+on track.mediatypeid=MediaType.MediaTypeId
+group by MediaType.Name
+
+
+#2
+SELECT Customer.Country, avg(invoice.Total) AS "Average Invoice"
+FROM Customer
+JOIN Invoice
+ON Customer.CustomerId=Invoice.InvoiceId
+GROUP BY Customer.Country
+
+
+#3
+SELECT Employee.EmployeeId AS "Employee", sum(Invoice.Total) AS "Total Spend"
+FROM Employee
+JOIN Customer
+ON Employee.EmployeeId=Customer.SupportRepId
+JOIN Invoice
+ON Invoice.CustomerId=Customer.CustomerId
+WHERE Invoice.Total >=3.96
+GROUP BY EmployeeId
+
+
+#4
+select avg(track.milliseconds) as 'Length of Track(m/sec)', album.Title, genre.Name
+from Album
+join Track
+on album.AlbumId=track.AlbumId
+join Genre
+on track.genreid=genre.GenreId
+group by genre.name, track.milliseconds
